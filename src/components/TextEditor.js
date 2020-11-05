@@ -6,6 +6,7 @@ class TextEditor extends React.Component {
     this.state = {
       input_word: '',
       contentString: '',
+      status: false
       
     }
     this.handleAppendClick = this.handleAppendClick.bind(this)
@@ -38,14 +39,16 @@ class TextEditor extends React.Component {
             className="word-input" 
             type="text" 
             data-testid="word-input" 
-            onChange={(e) => this.setState({input_word: e.target.value})}
+            onChange={(e) => this.setState({
+              input_word: e.target.value,
+            })}
             value={this.state.input_word}
             
           />
-          <button data-testid="append-button" onClick={this.handleAppendClick}>
+          <button data-testid="append-button" disabled={this.state.input_word ? false : true} onClick={this.handleAppendClick}>
             Append
           </button>
-          <button data-testid="undo-button" onClick={this.removeLast}>
+          <button data-testid="undo-button" disabled={this.state.contentString ? false : true} onClick={this.removeLast}>
             Undo
           </button>
         </div>
